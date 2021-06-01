@@ -5,7 +5,6 @@
 #include<iostream>
 using namespace std;
 
-
 int main()
 {
     int n;
@@ -21,4 +20,5 @@ int main()
         sum += dp;
     }
     cout<<sum;
+    return 0;
 }

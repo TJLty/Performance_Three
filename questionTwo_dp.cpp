@@ -1,5 +1,5 @@
 //
-// Created by TJ_Lty on 2021/5/30.
+// Created by TJ_Lty on 2021/6/1.
 //
 
 #include<iostream>
@@ -10,7 +10,7 @@
 using namespace std;
 static bool operator <(pair<int,int> &a,pair<int,int> &b)
 {
-    return a.second<b.second;
+    return a.first<b.first;
 }
 vector<pair<int,int> > elm;
 int main()
@@ -20,16 +20,17 @@ int main()
         elm.push_back(pair<int,int>(a,b));
     }
     sort(elm.begin(),elm.end());
-    int end=elm[0].second;
-    int ans=1;
-    for(int i=1;i<elm.size();i++)
+    int n=elm.size();
+    vector<int> dp(n,1);
+    for(int i=0;i<n;i++)
     {
-        if(elm[i].first>=end)
+        for(int j=0;j<i;j++)
         {
-            end=elm[i].second;
-            ans++;
+            if (elm[j].second <= elm[i].first) {
+                dp[i] = max(dp[i], dp[j] + 1);
+            }
         }
     }
-    cout<<elm.size()-ans;
+    cout<<n-*max_element(dp.begin(),dp.end());
     return 0;
 }
